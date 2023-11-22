@@ -5,6 +5,12 @@
       "name": "frfr",
       "description": "frfr",
       "element": "fire"
+    },
+    {
+      "id": "661346e4-9200-4221-be37-549fec2b2c14",
+      "name": "eddfr",
+      "description": "gtgt",
+      "element": "water"
     }
   ],
   "filters": [

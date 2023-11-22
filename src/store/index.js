@@ -1,11 +1,12 @@
-import { legacy_createStore as createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+// import { legacy_createStore as createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { configureStore/* , getDefaultMiddleware */ } from '@reduxjs/toolkit';
 // import reducer from '../reducers';
-import ReduxThunk from 'redux-thunk';
+// import ReduxThunk from 'redux-thunk';
 // import heroes from '../reducers/heroes';
-import heroes from '../components/heroesList/heroesSlice';
+// import heroes from '../components/heroesList/heroesSlice';
 // import filters from '../reducers/filters';
 import filters from '../components/heroesFilters/filtersSlice';
+import {apiSlice} from '../api/apiSlice';
 
 const stringMiddleware = () => (dispatch) => (action) => {
     if (typeof action === 'string') {
@@ -42,8 +43,10 @@ const stringMiddleware = () => (dispatch) => (action) => {
                     // )
                     //  );
 const store = configureStore({
-    reducer: {heroes, filters},
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware), 
+    reducer: {/* heroes, */ 
+                filters,
+                [apiSlice.reducerPath]: apiSlice.reducer},
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(stringMiddleware, apiSlice.middleware), 
     // middleware: [ReduxThunk, stringMiddleware], 
     devTools: process.env.NODE_ENV !== 'production'
    
